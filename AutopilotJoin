@@ -1,0 +1,39 @@
+    Write-Host "Please choose country for Autopilot Enrollment:"
+    Write-Host "1. Denmark"
+    Write-Host "2. Sweden"
+    Write-Host "3. Finland"
+    Write-Host "4. Norway"
+    Write-Host "5. Germany"
+    Write-Host "6. United Kingdom"
+    Write-Host "7. Poland"
+    Write-Host "8. Latvia"
+    Write-Host "9. Estonia"
+    Write-host “10. Croatia”
+    Write-host “11. Lithuania”
+    Write-host “12. Bulgaria”
+
+    $selection = Read-Host -Prompt 'Enter the number corresponding to your choice'
+
+    switch ($selection) {
+
+        1 {$AP="DK"}
+        2 {$AP="SE"}
+        3 {$AP="FI"}
+        4 {$AP="NO"}
+        5 {$AP="DE"} 
+        6{$AP =”UK”}
+        7{$ap=”PL”}
+        8{$ap=”LAT”}
+        (9){$ap=”EST”}
+        (10){$ap=”CRO”}
+         (11) { $Ap=“LIT" }
+          (12) { $Ap=“BUL" }
+          
+          default {
+        Write-Warning -Message ('Invalid Selection: "{0}"', $selection)
+    }
+}
+
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Confirm:$false -Force:$true
+Install-Script get-windowsautopilotinfo -Confirm:$false -Force:$true
+get-windowsautopilotinfo -Online -TenantId XXXXXXXX -AppId XXXXXXXX -AppSecret XXXXXXXXX -GroupTag $AP
